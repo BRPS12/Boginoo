@@ -62,12 +62,6 @@ const Signup = () => {
             <label htmlFor="pass" className="labels">
               Нууц үгээ давтна уу?
             </label>
-            <input
-              type="text"
-              name="pass"
-              className="inps"
-              placeholder="••••••••••"
-            />
           </div>
           <button type="submit" className="clickGreen" onClick={signUp}>
             Бүртгүүлэх
