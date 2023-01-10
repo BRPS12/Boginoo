@@ -1,5 +1,5 @@
 import Link from "../model/Link.js";
-
+import { nanoid } from "nanoid";
 export const getAllLink = async (req, res) => {
   try {
     const link = await Link.find({});
@@ -16,8 +16,11 @@ export const getAllLink = async (req, res) => {
 export const createLink = async (req, res) => {
   try {
     const link = await Link.create(req.body);
+
     res.status(200).send({
-      data: link,
+      data: {
+        url: link,
+      },
     });
   } catch (error) {
     res.status(400).send({
@@ -28,10 +31,24 @@ export const createLink = async (req, res) => {
 
 export const getLink = async (req, res) => {
   try {
-    const link = req.params.link;
-    const links = await Link.findOne({ link: link });
+    const id = req.params.id;
+    const links = await Link.findOne({ shortId: id });
     res.status(200).send({
       data: links,
+    });
+  } catch (error) {
+    res.status(400).send({
+      data: error.message,
+    });
+  }
+};
+
+export const deleteLink = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const link = await Link.deleteOne({ _id: id });
+    res.status(200).send({
+      data: link,
     });
   } catch (error) {
     res.status(400).send({
