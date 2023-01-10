@@ -5,15 +5,15 @@ import Login from "./Pages/Login";
 import Forgot from "./Pages/Forgot";
 import Signup from "./Pages/Signup";
 
-function App() {
+const App = () => {
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="login" element={<Login />} />
-          <Route path="signUp" element={<Signup />} />
-          <Route path="forgot" element={<Forgot />} />
+          <Route path="/Login" element={<Login />} />
+          <Route path="/SignUp" element={<Signup />} />
+          <Route path="/Forgot" element={<Forgot />} />
         </Routes>
       </BrowserRouter>
     </div>

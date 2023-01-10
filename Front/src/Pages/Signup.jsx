@@ -1,6 +1,29 @@
 import "../Styles/LoginAndSignup.css";
+import axios from "axios";
+import { useState } from "react"
 
 const Signup = () => {
+  const [name , setName] = useState()
+  const [password , setPassword] = useState()
+  const instance = axios.create({
+    baseURL: "http://localhost:4200/users/",
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+    },
+  });
+  const signUp = async () => {
+    try {
+      const res = await instance.post("/signup" , {
+       name : name,
+       password : password
+      })
+      console.log(res)
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
+  
+
   return (
     <div className="loginContainer">
       <header>
@@ -19,7 +42,8 @@ const Signup = () => {
               type="text"
               name="email"
               className="inps"
-              placeholder="name@mail.domain"
+              placeholder="username"
+              onChange={(e) => setName(e.target.value)}
             />
           </div>
           <div className="boxThree">
@@ -31,6 +55,7 @@ const Signup = () => {
               name="pass"
               className="inps"
               placeholder="••••••••••"
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
           <div className="boxThree">
@@ -44,7 +69,7 @@ const Signup = () => {
               placeholder="••••••••••"
             />
           </div>
-          <button type="submit" className="clickGreen">
+          <button type="submit" className="clickGreen" onClick={signUp}>
             Бүртгүүлэх
           </button>
         </div>

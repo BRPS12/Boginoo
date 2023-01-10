@@ -1,7 +1,21 @@
 import "../Styles/LoginAndSignup.css";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Login = () => {
+  const instance = axios.create({
+    baseURL: "http://localhost:4200/users/",
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+    },
+  });
+  const logIn = async () => {
+    try {
+      
+    } catch (error) {
+      
+    }
+  }
   return (
     <div className="loginContainer">
       <header>
