@@ -3,7 +3,7 @@ import { nanoid } from "nanoid";
 
 const LinkSchema = new mongoose.Schema({
   username: {
-    required: [true, "Name"],
+    required: [false, "Name"],
     type: String,
   },
   link: {

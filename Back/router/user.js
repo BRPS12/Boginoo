@@ -4,13 +4,14 @@ import {
   createUser,
   getUserByObject,
   deleteUser,
+  getUserById,
 } from "../controller/users.js";
 
 const userRouter = express.Router();
 
-userRouter.route("/users").get(getAllUser);
+userRouter.route("/").get(getAllUser);
 userRouter.route("/signup").post(createUser);
-userRouter.route("/login").get(getUserByObject);
-userRouter.route("/users/:id").delete(deleteUser);
+userRouter.route("/login").post(getUserByObject);
+userRouter.route("/:id").delete(deleteUser).get(getUserById);
 
 export default userRouter;

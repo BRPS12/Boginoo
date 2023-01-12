@@ -32,6 +32,13 @@ header {
     display: flex;
     gap: 40px;
     align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #FFFFFF;
+    background-color: #02B589;
+    border: 0;
+    border-radius: 25px;
+    padding: 10px 30px;
 }
 .boginooButton {
     font-size: 18px;
@@ -89,4 +96,10 @@ footer {
     align-items: center;
 }
 
+.hooson {
+    display: none;
+}
+.buten {
+    display: block;
+}
 /* footer >>> */

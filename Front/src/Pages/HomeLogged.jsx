@@ -1,12 +1,22 @@
-import "../Styles/Home.css";
-import { Link } from "react-router-dom";
-import { useState } from "react";
 import { instance } from "../App";
+import "../Styles/Home.css";
+import { Link, useParams } from "react-router-dom";
+import { useState } from "react";
 import { useEffect } from "react";
 
-const Home = () => {
+const HomeLogged = () => {
+  const { id } = useParams();
+  console.log(id);
   const [link, setLink] = useState();
   const [data, setData] = useState([]);
+  const [name, setName] = useState();
+
+  const getUser = async () => {
+    const res = await instance.get(`/users/${id}`);
+    setName(res.data.data.name);
+    console.log(res);
+  };
+
   const shortId = async () => {
     try {
       const res = await instance.post("/links/createlink", {
@@ -17,16 +27,14 @@ const Home = () => {
       console.log(error.message);
     }
   };
+  useEffect(() => {
+    getUser();
+  }, []);
   return (
     <div className="homeContainer">
       <header>
         <br />
-        <div className="headerRight">
-          <span className="boginooHerhen">Хэрхэн ажилладаг вэ?</span>
-          <Link to={"/login"}>
-            <button className="boginooButton">Нэвтрэх</button>
-          </Link>
-        </div>
+        <div className="headerRight">{name}</div>
       </header>
       <main>
         <img src={require("../images/boginooLogo.png")} alt="" />
@@ -58,4 +66,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomeLogged;

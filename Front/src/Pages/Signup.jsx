@@ -1,31 +1,29 @@
 import "../Styles/LoginAndSignup.css";
 import axios from "axios";
-import { useState } from "react"
-
+import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { instance } from "../App";
 const Signup = () => {
-  const [name , setName] = useState()
-  const [password , setPassword] = useState()
-  const instance = axios.create({
-    baseURL: "http://localhost:4200/users/",
-    headers: {
-      "Content-type": "application/json; charset=UTF-8",
-    },
-  });
+  const [name, setName] = useState();
+  const [password, setPassword] = useState();
+  const [email, setEmail] = useState();
   const signUp = async () => {
     try {
-      const res = await instance.post("/signup" , {
-       name : name,
-       password : password
-      })
-      console.log(res)
+      const res = await instance.post("/users/signup", {
+        name: name,
+        password: password,
+        email: email,
+      });
+      toast.success("Amjilttai burtguullee");
     } catch (error) {
-      console.log(error.message)
+      toast.error("Burtgeltei email baina");
     }
-  }
-  
+  };
 
   return (
     <div className="loginContainer">
+      <ToastContainer />
       <header>
         <br />
         <span className="boginooHerhen">Хэрхэн ажилладаг вэ?</span>
@@ -36,19 +34,31 @@ const Signup = () => {
           <p className="boginooP">Бүртгүүлэх</p>
           <div className="boxThree">
             <label htmlFor="email" className="labels">
-              Цахим хаяг
+              Username
             </label>
             <input
               type="text"
               name="email"
               className="inps"
-              placeholder="username"
+              placeholder="Username"
               onChange={(e) => setName(e.target.value)}
             />
           </div>
           <div className="boxThree">
+            <label htmlFor="email" className="labels">
+              Email
+            </label>
+            <input
+              type="text"
+              name="email"
+              className="inps"
+              placeholder="Email"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div className="boxThree">
             <label htmlFor="pass" className="labels">
-              Нууц үг
+              Password
             </label>
             <input
               type="text"
@@ -57,11 +67,6 @@ const Signup = () => {
               placeholder="••••••••••"
               onChange={(e) => setPassword(e.target.value)}
             />
-          </div>
-          <div className="boxThree">
-            <label htmlFor="pass" className="labels">
-              Нууц үгээ давтна уу?
-            </label>
           </div>
           <button type="submit" className="clickGreen" onClick={signUp}>
             Бүртгүүлэх

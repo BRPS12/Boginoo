@@ -29,11 +29,14 @@ export const createUser = async (req, res) => {
 
 export const getUserByObject = async (req, res) => {
   try {
+    const { email, password } = req.body;
     const user = await Post.findOne({
-      name: req.body.name,
-      password: req.body.password,
+      email,
     });
     if (user) {
+      if (user.password !== password) {
+        throw new Error("Email or password wrong");
+      }
       res.status(200).send({
         data: user,
       });
@@ -42,7 +45,26 @@ export const getUserByObject = async (req, res) => {
         data: "tiim user bhq bn",
       });
     }
-  } catch (error) {}
+  } catch (error) {
+    res.status(400).send({
+      success: false,
+      error: error.message,
+    });
+  }
+};
+
+export const getUserById = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const user = await Post.findById({ _id: id });
+    res.status(200).send({
+      data: user,
+    });
+  } catch (error) {
+    res.status(400).send({
+      data: error.message,
+    });
+  }
 };
 
 export const deleteUser = async (req, res) => {

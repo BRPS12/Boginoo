@@ -1,68 +1,84 @@
 import "../Styles/LoginAndSignup.css";
 import { Link } from "react-router-dom";
-import axios from "axios";
-
+import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { instance } from "../App";
 const Login = () => {
-  const instance = axios.create({
-    baseURL: "http://localhost:4200/users/",
-    headers: {
-      "Content-type": "application/json; charset=UTF-8",
-    },
-  });
+  const [password, setPassword] = useState();
+  const [email, setEmail] = useState();
   const logIn = async () => {
     try {
-      
+      const res = await instance.post("/users/login", {
+        email: email,
+        password: password,
+      });
+      console.log(res.data.data._id);
+      window.location.replace(`/users/${res.data.data._id}`);
     } catch (error) {
-      
+      toast.error(error.response.data.error);
     }
-  }
+  };
   return (
-    <div className="loginContainer">
-      <header>
-        <br />
-        <span className="boginooHerhen">Хэрхэн ажилладаг вэ?</span>
-      </header>
-      <main>
-        <div className="loginBox">
-          <img src={require("../images/logo.png")} className="logo" />
-          <p className="boginooP">Нэвтрэх</p>
-          <div className="boxThree">
-            <label htmlFor="email" className="labels">
-              Цахим хаяг
-            </label>
-            <input
-              type="text"
-              name="email"
-              className="inps"
-              placeholder="name@mail.domain"
-            />
-          </div>
-          <div className="boxThree">
-            <label htmlFor="pass" className="labels">
-              Нууц үг
-            </label>
-            <input
-              type="text"
-              name="pass"
-              className="inps"
-              placeholder="••••••••••"
-            />
-          </div>
-          <div className="boxTwo">
-            <div>
-              <input type="checkbox" name="check" className="checkBox" />
-              <label htmlFor="check" className="checkLabel">Намайг сана</label>
+    <>
+      <ToastContainer />
+      <div className="loginContainer">
+        <header>
+          <br />
+          <span className="boginooHerhen">Хэрхэн ажилладаг вэ?</span>
+        </header>
+        <main>
+          <div className="loginBox">
+            <img src={require("../images/logo.png")} alt="" className="logo" />
+            <p className="boginooP">Нэвтрэх</p>
+            <div className="boxThree">
+              <label htmlFor="email" className="labels">
+                Цахим хаяг
+              </label>
+              <input
+                type="text"
+                name="email"
+                className="inps"
+                placeholder="name@mail.domain"
+                onChange={(e) => setEmail(e.target.value)}
+              />
             </div>
-            <Link to={"/forgot"} className="linkStyle">Нууц үгээ мартсан</Link>
+            <div className="boxThree">
+              <label htmlFor="pass" className="labels">
+                Нууц үг
+              </label>
+              <input
+                type="text"
+                name="pass"
+                className="inps"
+                placeholder="••••••••••"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            <div className="boxTwo">
+              <div>
+                <input type="checkbox" name="check" className="checkBox" />
+                <label htmlFor="check" className="checkLabel">
+                  Намайг сана
+                </label>
+              </div>
+              <Link to={"/forgot"} className="linkStyle">
+                Нууц үгээ мартсан
+              </Link>
+            </div>
+            <button type="submit" className="clickGreen" onClick={logIn}>
+              Нэвтрэх
+            </button>
+            <Link to={"/signUp"} className="newUser">
+              Шинэ хэрэглэгч бол энд дарна уу?
+            </Link>
           </div>
-          <button type="submit" className="clickGreen">Нэвтрэх</button>
-          <Link to={"/signUp"} className="newUser">Шинэ хэрэглэгч бол энд дарна уу?</Link>
-        </div>
-      </main>
-      <footer>
-        <img src={require("../images/credit.png")} alt="" />
-      </footer>
-    </div>
+        </main>
+        <footer>
+          <img src={require("../images/credit.png")} alt="" />
+        </footer>
+      </div>
+    </>
   );
 };
 
