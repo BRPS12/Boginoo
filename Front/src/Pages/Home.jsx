@@ -22,7 +22,9 @@ const Home = () => {
       <header>
         <br />
         <div className="headerRight">
-          <span className="boginooHerhen">Хэрхэн ажилладаг вэ?</span>
+          <div>
+            <span style={{ color: "#02B589" }}>Хэрхэн ажилладаг вэ?</span>
+          </div>
           <Link to={"/login"}>
             <button className="boginooButton">Нэвтрэх</button>
           </Link>

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { instance } from "../App";
+import { Link } from "react-router-dom";
 const Signup = () => {
   const [name, setName] = useState();
   const [password, setPassword] = useState();
@@ -68,9 +69,16 @@ const Signup = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <button type="submit" className="clickGreen" onClick={signUp}>
+          <button
+            type="submit"
+            className="boginooButton hemjee"
+            onClick={signUp}
+          >
             Бүртгүүлэх
           </button>
+          <Link className="boginooButton gyHemjee" to="/login">
+            Нэвтрэх
+          </Link>
         </div>
       </main>
       <footer>

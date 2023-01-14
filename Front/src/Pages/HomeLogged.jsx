@@ -6,18 +6,25 @@ import { useEffect } from "react";
 
 const HomeLogged = () => {
   const { id } = useParams();
-  console.log(id);
   const [link, setLink] = useState();
   const [data, setData] = useState([]);
   const [name, setName] = useState();
+  const [history, setHistory] = useState([]);
 
   const getUser = async () => {
     const res = await instance.get(`/users/${id}`);
     setName(res.data.data.name);
-    console.log(res);
+  };
+  const getHistory = async () => {
+    const res = await instance.get("/links");
+    setHistory(
+      res.data.data.map((el) => {
+        return el.link;
+      })
+    );
   };
 
-  const shortId = async () => {
+  const showShortId = async () => {
     try {
       const res = await instance.post("/links/createlink", {
         link: link,
@@ -27,17 +34,43 @@ const HomeLogged = () => {
       console.log(error.message);
     }
   };
+
   useEffect(() => {
     getUser();
-  }, []);
+    getHistory();
+  }, [history]);
   return (
     <div className="homeContainer">
       <header>
         <br />
-        <div className="headerRight">{name}</div>
+        <div>
+          <div className="boginooButton">{name}</div>
+          <div
+            className="boginooButton"
+            style={{
+              marginTop: 10,
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <Link
+              to="/"
+              style={{
+                color: "white",
+                textDecoration: "none ",
+                cursor: " pointer",
+              }}
+            >
+              Log Out
+            </Link>
+          </div>
+        </div>
       </header>
+
       <main>
-        <img src={require("../images/boginooLogo.png")} alt="" />
+        <Link to={"/homelogged"}>
+          <img src={require("../images/boginooLogo.png")} alt="" />
+        </Link>
         <div className="box">
           <input
             placeholder="https://www.web-huudas.mn"
@@ -45,18 +78,29 @@ const HomeLogged = () => {
             id="boginooInp"
             onChange={(e) => setLink(e.target.value)}
           />
-          <button onClick={shortId} className="boginooButton">
+          <button className="boginooButton" onClick={showShortId}>
             Богиносгох
           </button>
         </div>
-        <div>
+        <div style={{ marginTop: 0 }}>
           <p>Өгөгдсөн холбоос:</p>
 
           <span>{link}</span>
           <p>Богино холбоос:</p>
           <span style={{ color: "purple", fontSize: 20 }}>
-            localhost:3000/{data}
+            {"localhost:3000/" + data}
           </span>
+        </div>
+        <h2 style={{ color: "#02B589", margin: 0, padding: 0 }}>Түүх</h2>
+        <div className="history">
+          {history.map((el) => {
+            return (
+              <div className="history2">
+                <p>Өгөгдсөн холбоос:</p>
+                {el}
+              </div>
+            );
+          })}
         </div>
       </main>
       <footer>
