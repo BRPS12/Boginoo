@@ -33,6 +33,7 @@ export const getUserByObject = async (req, res) => {
     const user = await Post.findOne({
       email,
     });
+
     if (user) {
       if (user.password !== password) {
         throw new Error("Email or password wrong");
