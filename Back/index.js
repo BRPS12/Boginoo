@@ -1,24 +1,30 @@
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
-import { port, MONGO_URI } from "./config.js";
 import userRouter from "./router/user.js";
 import linkRouter from "./router/link.js";
-
+import dotenv from "dotenv";
+dotenv.config();
 const app = express();
-
+const firstMiddleWare = (req, res, next) => {
+  console.log("res method =>", req.method);
+  next();
+};
 app.use(express.json());
 
 app.use(cors());
 
-app.use("/users", userRouter);
+app.use("/users", firstMiddleWare, userRouter);
 
 app.use("/links", linkRouter);
+
+const uri = process.env.MONGO_ATLAS_URI || "";
+const port = process.env.PORT || 4200;
 
 const connect = () => {
   try {
     mongoose.set("strictQuery", true);
-    mongoose.connect(MONGO_URI, {}).then(() => {
+    mongoose.connect(uri, {}).then(() => {
       console.log("Connected to MongoDB");
     });
   } catch (error) {
