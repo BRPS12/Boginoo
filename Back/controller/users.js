@@ -1,5 +1,5 @@
 import Post from "../model/User.js";
-
+import jwt from "jsonwebtoken";
 export const getAllUser = async (req, res) => {
   try {
     const user = await Post.find({});
@@ -30,6 +30,17 @@ export const createUser = async (req, res) => {
 export const getUserByObject = async (req, res) => {
   try {
     const { email, password } = req.body;
+    const token = jwt.sign(
+      {
+        username: req.body.username,
+        email: req.body.email,
+        password: req.body.password,
+      },
+      "secret",
+      {
+        expiresIn: "1d",
+      }
+    );
     const user = await Post.findOne({
       email,
     });
@@ -40,6 +51,7 @@ export const getUserByObject = async (req, res) => {
       }
       res.status(200).send({
         data: user,
+        token: token,
       });
     } else {
       res.status(404).send({

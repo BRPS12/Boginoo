@@ -6,15 +6,12 @@ import linkRouter from "./router/link.js";
 import dotenv from "dotenv";
 dotenv.config();
 const app = express();
-const firstMiddleWare = (req, res, next) => {
-  console.log("res method =>", req.method);
-  next();
-};
+
 app.use(express.json());
 
 app.use(cors());
 
-app.use("/users", firstMiddleWare, userRouter);
+app.use("/users", userRouter);
 
 app.use("/links", linkRouter);
 
