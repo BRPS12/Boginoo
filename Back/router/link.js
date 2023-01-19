@@ -5,10 +5,10 @@ import {
   getLink,
   deleteLink,
 } from "../controller/links.js";
-
+import { checkToken } from "../middleware/middleware.js";
 const linkRouter = express.Router();
 
-linkRouter.route("/createlink").post(createLink);
+linkRouter.post("/createlink", checkToken, createLink);
 linkRouter.route("/").get(getAllLink);
 linkRouter.route("/:id").get(getLink);
 linkRouter.route("/:id").delete(deleteLink);

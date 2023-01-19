@@ -29,7 +29,6 @@ export const createUser = async (req, res) => {
 
 export const getUserByObject = async (req, res) => {
   try {
-    const { email, password } = req.body;
     const token = jwt.sign(
       {
         username: req.body.username,
@@ -38,9 +37,12 @@ export const getUserByObject = async (req, res) => {
       },
       "secret",
       {
-        expiresIn: "1d",
+        expiresIn: 30,
       }
     );
+    res.cookie("token", token, { httpOnly: true });
+
+    const { email, password } = req.body;
     const user = await Post.findOne({
       email,
     });
