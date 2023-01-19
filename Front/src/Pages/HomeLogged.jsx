@@ -28,7 +28,9 @@ const HomeLogged = () => {
     try {
       const res = await instance.post("/links/createlink", {
         link: link,
+        token: JSON.parse(localStorage.getItem("token")),
       });
+      console.log(res);
       setData(res.data.data.url.shortId);
     } catch (error) {
       console.log(error.message);

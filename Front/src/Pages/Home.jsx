@@ -2,7 +2,6 @@ import "../Styles/Home.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { instance } from "../App";
-import { useEffect } from "react";
 
 const Home = () => {
   const [link, setLink] = useState();
@@ -14,7 +13,7 @@ const Home = () => {
       });
       setData(res.data.data.url.shortId);
     } catch (error) {
-      console.log(error.message);
+      console.log(error);
     }
   };
   return (
@@ -25,7 +24,7 @@ const Home = () => {
           <div>
             <span style={{ color: "#02B589" }}>Хэрхэн ажилладаг вэ?</span>
           </div>
-          <Link to={"/login"}>
+          <Link to={"/login"} style={{ textDecoration: "none" }}>
             <button className="boginooButton">Нэвтрэх</button>
           </Link>
         </div>

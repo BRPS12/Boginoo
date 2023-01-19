@@ -13,10 +13,12 @@ const Login = () => {
         email: email,
         password: password,
       });
-      console.log(res.data.data._id);
+      console.log(res);
       window.location.replace(`/users/${res.data.data._id}`);
+      window.localStorage.setItem("token", JSON.stringify(res.data.token));
     } catch (error) {
-      toast.error(error.response.data.error);
+      toast.error(error.response.data.data);
+      console.log(error);
     }
   };
   return (
