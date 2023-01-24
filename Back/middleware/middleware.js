@@ -5,7 +5,7 @@ export const checkToken = (req, res, next) => {
   jwt.verify(token, "secret", (err, result) => {
     if (err) {
       res.status(403).send({
-        data: err.message,
+        data: "Token",
       });
     } else {
       next();

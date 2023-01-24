@@ -46,11 +46,12 @@ export const getUserByObject = async (req, res) => {
     const user = await Post.findOne({
       email,
     });
-
+    const isMatch = await user.comparePassword(password);
+    console.log(isMatch);
+    if (!isMatch) {
+      res.send("isMatch");
+    }
     if (user) {
-      if (user.password !== password) {
-        throw new Error("Email or password wrong");
-      }
       res.status(200).send({
         data: user,
         token: token,
