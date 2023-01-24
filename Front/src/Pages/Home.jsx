@@ -2,6 +2,7 @@ import "../Styles/Home.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { instance } from "../App";
+import { toast, ToastContainer } from "react-toastify";
 
 const Home = () => {
   const [link, setLink] = useState();
@@ -13,12 +14,13 @@ const Home = () => {
       });
       setData(res.data.data.url.shortId);
     } catch (error) {
-      console.log(error);
+      toast.error("Нэвтэр нь үү");
     }
   };
   return (
     <div className="homeContainer">
       <header>
+        <ToastContainer />
         <br />
         <div className="headerRight">
           <div>
