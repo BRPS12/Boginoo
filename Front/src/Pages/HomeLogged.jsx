@@ -10,15 +10,17 @@ const HomeLogged = () => {
   const [data, setData] = useState([]);
   const [name, setName] = useState();
   const [history, setHistory] = useState([]);
-
+  const params = useParams();
   const getUser = async () => {
     const res = await instance.get(`/users/${id}`);
     setName(res.data.data.name);
   };
+
   const getHistory = async () => {
-    const res = await instance.get("/links");
+    const res = await instance.get(`/users/${id}`);
+    console.log(res);
     setHistory(
-      res.data.data.map((el) => {
+      res.data.data.Link.map((el) => {
         return el.link;
       })
     );
@@ -28,12 +30,14 @@ const HomeLogged = () => {
     try {
       const res = await instance.post("/links/createlink", {
         link: link,
+        user_id: params.id,
         token: JSON.parse(localStorage.getItem("token")),
       });
+
       console.log(res);
       setData(res.data.data.url.shortId);
     } catch (error) {
-      console.log(error.message);
+      console.log(error.response.data.data);
     }
   };
 
@@ -70,9 +74,8 @@ const HomeLogged = () => {
       </header>
 
       <main>
-        <Link to={"/homelogged"}>
-          <img src={require("../images/boginooLogo.png")} alt="" />
-        </Link>
+        <img src={require("../images/boginooLogo.png")} alt="" />
+
         <div className="box">
           <input
             placeholder="https://www.web-huudas.mn"
