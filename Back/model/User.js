@@ -2,21 +2,29 @@ import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-export const UserSchema = new mongoose.Schema({
-  name: {
-    required: [true, "Name"],
-    type: String,
-    maxlength: [20, "Arail urt"],
+export const UserSchema = new mongoose.Schema(
+  {
+    name: {
+      required: [true, "Name"],
+      type: String,
+      maxlength: [20, "Arail urt"],
+    },
+    email: {
+      required: [false, "Email"],
+      unique: [true, "Burtgeltei email baina"],
+      type: String,
+    },
+    password: {
+      required: [true, "Password"],
+      type: String,
+    },
   },
-  email: {
-    required: [false, "Email"],
-    unique: [true, "Burtgeltei email baina"],
-    type: String,
-  },
-  password: {
-    required: [true, "Password"],
-    type: String,
-  },
+  { toJSON: { virtuals: true }, toObject: { virtuals: true } }
+);
+UserSchema.virtual("Link", {
+  ref: "Link",
+  localField: "_id",
+  foreignField: "user_id",
 });
 UserSchema.path("name").validate((name) => {
   return !/[0-9]/.test(name);

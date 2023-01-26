@@ -2,7 +2,7 @@ import Post from "../model/User.js";
 import jwt from "jsonwebtoken";
 export const getAllUser = async (req, res) => {
   try {
-    const user = await Post.find({});
+    const user = await Post.find({}).populate("Link");
     res.status(200).send({
       data: user,
     });
@@ -37,11 +37,9 @@ export const getUserByObject = async (req, res) => {
       },
       "secret",
       {
-        expiresIn: 30,
+        expiresIn: "1d",
       }
     );
-    res.cookie("token", token, { httpOnly: true });
-
     const { email, password } = req.body;
     const user = await Post.findOne({
       email,
@@ -72,7 +70,7 @@ export const getUserByObject = async (req, res) => {
 export const getUserById = async (req, res) => {
   try {
     const id = req.params.id;
-    const user = await Post.findById({ _id: id });
+    const user = await Post.findById({ _id: id }).populate("Link");
     res.status(200).send({
       data: user,
     });

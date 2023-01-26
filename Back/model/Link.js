@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 import { nanoid } from "nanoid";
 
 const LinkSchema = new mongoose.Schema({
@@ -12,6 +12,11 @@ const LinkSchema = new mongoose.Schema({
   },
   shortId: {
     type: String,
+  },
+  user_id: {
+    type: String,
+    ref: "User",
+    required: true,
   },
 });
 
