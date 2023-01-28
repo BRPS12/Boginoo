@@ -56,3 +56,24 @@ export const deleteLink = async (req, res) => {
     });
   }
 };
+
+// export const adminDelete = async (req, res) => {
+//   try {
+//     const { role } = req.body;
+//     const id = req.params.id;
+//     if (role == "admin") {
+//       const user = await Link.deleteOne({ _id: id });
+//       res.status(200).send({
+//         data: user,
+//       });
+//     } else {
+//       res.status(400).send({
+//         data: "admin bish",
+//       });
+//     }
+//   } catch (error) {
+//     res.status(400).send({
+//       data: error,
+//     });
+//   }
+// };

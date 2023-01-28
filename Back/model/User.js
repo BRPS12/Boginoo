@@ -18,6 +18,12 @@ export const UserSchema = new mongoose.Schema(
       required: [true, "Password"],
       type: String,
     },
+    role: {
+      enum: ["normal", "admin"],
+      default: "normal",
+      required: true,
+      type: String,
+    },
   },
   { toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );

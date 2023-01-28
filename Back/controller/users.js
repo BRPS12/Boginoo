@@ -29,18 +29,18 @@ export const createUser = async (req, res) => {
 
 export const getUserByObject = async (req, res) => {
   try {
+    const { email, password, role } = req.body;
     const token = jwt.sign(
       {
-        username: req.body.username,
-        email: req.body.email,
-        password: req.body.password,
+        email: email,
+        password: password,
+        role: role,
       },
       "secret",
       {
         expiresIn: "1d",
       }
     );
-    const { email, password } = req.body;
     const user = await Post.findOne({
       email,
     });
