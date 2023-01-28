@@ -9,13 +9,16 @@ const Signup = () => {
   const [name, setName] = useState();
   const [password, setPassword] = useState();
   const [email, setEmail] = useState();
+  const [role, setRole] = useState();
   const signUp = async () => {
     try {
       const res = await instance.post("/users/signup", {
         name: name,
         password: password,
         email: email,
+        role: role,
       });
+      console.log(res);
       toast.success("Amjilttai burtguullee");
     } catch (error) {
       toast.error("Burtgeltei email baina");
@@ -55,6 +58,18 @@ const Signup = () => {
               className="inps"
               placeholder="Email"
               onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div className="boxThree">
+            <label htmlFor="email" className="labels">
+              Role
+            </label>
+            <input
+              type="text"
+              name="email"
+              className="inps"
+              placeholder="Role"
+              onChange={(e) => setRole(e.target.value)}
             />
           </div>
           <div className="boxThree">

@@ -3,6 +3,7 @@ import "../Styles/Home.css";
 import { Link, useParams } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
+import { toast, ToastContainer } from "react-toastify";
 
 const HomeLogged = () => {
   const { id } = useParams();
@@ -10,31 +11,40 @@ const HomeLogged = () => {
   const [data, setData] = useState([]);
   const [name, setName] = useState();
   const [history, setHistory] = useState([]);
+  const [del, setDel] = useState();
+  const [role, setRole] = useState();
   const params = useParams();
   const getUser = async () => {
     const res = await instance.get(`/users/${id}`);
     setName(res.data.data.name);
+    setRole(res.data.data.role);
   };
 
   const getHistory = async () => {
     const res = await instance.get(`/users/${id}`);
-    console.log(res);
     setHistory(
       res.data.data.Link.map((el) => {
+        setDel(el._id);
         return el.link;
       })
     );
   };
 
+  const deleteHistory = async () => {
+    if (role == "admin") {
+      const res = await instance.delete(`/links/${del}`);
+    } else {
+      toast.error("Admin bish");
+    }
+  };
+
   const showShortId = async () => {
     try {
       const res = await instance.post("/links/createlink", {
-        link: link,
         user_id: params.id,
+        link: link,
         token: JSON.parse(localStorage.getItem("token")),
       });
-
-      console.log(res);
       setData(res.data.data.url.shortId);
     } catch (error) {
       console.log(error.response.data.data);
@@ -47,6 +57,7 @@ const HomeLogged = () => {
   }, [history]);
   return (
     <div className="homeContainer">
+      <ToastContainer />
       <header>
         <br />
         <div>
@@ -100,9 +111,12 @@ const HomeLogged = () => {
         <div className="history">
           {history.map((el) => {
             return (
-              <div className="history2">
-                <p>Өгөгдсөн холбоос:</p>
-                {el}
+              <div>
+                <div className="history2">
+                  <p>Өгөгдсөн холбоос:</p>
+                  {el}
+                </div>
+                <button onClick={deleteHistory}>hogiin sav</button>
               </div>
             );
           })}

@@ -7,13 +7,16 @@ import { instance } from "../App";
 const Login = () => {
   const [password, setPassword] = useState();
   const [email, setEmail] = useState();
+  const [role, setRole] = useState();
   const logIn = async () => {
     try {
       const res = await instance.post("/users/login", {
         email: email,
         password: password,
+        role: role,
       });
       console.log(res);
+      setRole(res.data.data.role);
       window.location.replace(`/users/${res.data.data._id}`);
       window.localStorage.setItem("token", JSON.stringify(res.data.token));
     } catch (error) {
