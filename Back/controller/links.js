@@ -1,8 +1,9 @@
 import Link from "../model/Link.js";
-
 export const getAllLink = async (req, res) => {
   try {
-    const link = await Link.find({});
+    const Skip = req.query.skip;
+    const Limit = req.query.limit;
+    const link = await Link.find({}).limit(Limit).skip(Skip);
     res.status(200).send({
       data: link,
     });
@@ -31,8 +32,8 @@ export const createLink = async (req, res) => {
 
 export const getLink = async (req, res) => {
   try {
-    const id = req.params.id;
-    const links = await Link.findOne({ shortId: id });
+    const { shortid } = req.params;
+    const links = await Link.findOne({ shortId: shortid });
     res.status(200).send({
       data: links,
     });
@@ -46,7 +47,7 @@ export const getLink = async (req, res) => {
 export const deleteLink = async (req, res) => {
   try {
     const id = req.params.id;
-    const link = await Link.deleteOne({ _id: id });
+    const link = await Link.findByIdAndRemove({ _id: id });
     res.status(200).send({
       data: link,
     });
@@ -56,24 +57,3 @@ export const deleteLink = async (req, res) => {
     });
   }
 };
-
-// export const adminDelete = async (req, res) => {
-//   try {
-//     const { role } = req.body;
-//     const id = req.params.id;
-//     if (role == "admin") {
-//       const user = await Link.deleteOne({ _id: id });
-//       res.status(200).send({
-//         data: user,
-//       });
-//     } else {
-//       res.status(400).send({
-//         data: "admin bish",
-//       });
-//     }
-//   } catch (error) {
-//     res.status(400).send({
-//       data: error,
-//     });
-//   }
-// };
