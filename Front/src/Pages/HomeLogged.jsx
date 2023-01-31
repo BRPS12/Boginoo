@@ -21,17 +21,24 @@ const HomeLogged = () => {
   };
 
   const getHistory = async () => {
-    const res = await instance.get(`/users/${id}`);
+    const res = await instance.get(`/links/?limit=1&skip=2`);
     setHistory(
-      res.data.data.Link.map((el) => {
+      res.data.data.map((el) => {
         setDel(el._id);
         return el.link;
       })
     );
+    console.log(res);
+    // setHistory(
+    //   res.data.data.Link.map((el) => {
+    //     setDel(el._id);
+    //     return el.link;
+    //   })
+    // );
   };
 
   const deleteHistory = async () => {
-    if (role == "admin") {
+    if (role === "admin") {
       const res = await instance.delete(`/links/${del}`);
     } else {
       toast.error("Admin bish");
