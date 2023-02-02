@@ -21,7 +21,7 @@ const HomeLogged = () => {
   };
 
   const getHistory = async () => {
-    const res = await instance.get(`/links/?limit=1&skip=2`);
+    const res = await instance.get(`/links/?limit=3`);
     setHistory(
       res.data.data.map((el) => {
         setDel(el._id);
@@ -36,10 +36,27 @@ const HomeLogged = () => {
     //   })
     // );
   };
-
+  const Page = async () => {
+    const res = await instance.get(`/links/?limit=3&skip=3`);
+    setHistory(
+      res.data.data.map((el) => {
+        setDel(el._id);
+        return el.link;
+      })
+    );
+  };
+  const Page2 = async () => {
+    const res = await instance.get(`/links/?limit=3&skip=6`);
+    setHistory(
+      res.data.data.map((el) => {
+        setDel(el._id);
+        return el.link;
+      })
+    );
+  };
   const deleteHistory = async () => {
     if (role === "admin") {
-      const res = await instance.delete(`/links/${del}`);
+      await instance.delete(`/links/${del}`);
     } else {
       toast.error("Admin bish");
     }
@@ -61,7 +78,7 @@ const HomeLogged = () => {
   useEffect(() => {
     getUser();
     getHistory();
-  }, [history]);
+  }, []);
   return (
     <div className="homeContainer">
       <ToastContainer />
@@ -116,9 +133,9 @@ const HomeLogged = () => {
         </div>
         <h2 style={{ color: "#02B589", margin: 0, padding: 0 }}>Түүх</h2>
         <div className="history">
-          {history.map((el) => {
+          {history.map((el, index) => {
             return (
-              <div>
+              <div key={index}>
                 <div className="history2">
                   <p>Өгөгдсөн холбоос:</p>
                   {el}
@@ -130,6 +147,9 @@ const HomeLogged = () => {
         </div>
       </main>
       <footer>
+        <button onClick={getHistory}>1</button>
+        <button onClick={Page}>2</button>
+        <button onClick={Page2}>3</button>
         <img src={require("../images/credit.png")} alt="" />
       </footer>
     </div>

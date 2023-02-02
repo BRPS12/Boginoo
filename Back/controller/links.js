@@ -3,6 +3,7 @@ export const getAllLink = async (req, res) => {
   try {
     const Skip = req.query.skip;
     const Limit = req.query.limit;
+    const Page = req.query.page;
     const link = await Link.find({}).limit(Limit).skip(Skip);
     res.status(200).send({
       data: link,

@@ -38,7 +38,7 @@ export const getUserByObject = async (req, res) => {
       },
       "secret",
       {
-        expiresIn: "1d",
+        expiresIn: "100d",
       }
     );
     const user = await Post.findOne({
