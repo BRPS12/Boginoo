@@ -1,5 +1,4 @@
 import "../Styles/LoginAndSignup.css";
-import axios from "axios";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -26,7 +25,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="loginContainer">
+    <div className="loginContainer" style={{ backgroundColor: "black" }}>
       <ToastContainer />
       <header>
         <br />
@@ -34,11 +33,11 @@ const Signup = () => {
       </header>
       <main>
         <div className="loginBox">
-          <img src={require("../images/logo.png")} className="logo" />
+          <img src={require("../images/logo.png")} alt="" className="logo" />
           <p className="boginooP">Бүртгүүлэх</p>
           <div className="boxThree">
             <label htmlFor="email" className="labels">
-              Username
+              <p style={{ color: "white" }}>Username</p>
             </label>
             <input
               type="text"
@@ -50,7 +49,7 @@ const Signup = () => {
           </div>
           <div className="boxThree">
             <label htmlFor="email" className="labels">
-              Email
+              <p style={{ color: "white" }}>Email </p>
             </label>
             <input
               type="text"
@@ -62,7 +61,7 @@ const Signup = () => {
           </div>
           <div className="boxThree">
             <label htmlFor="email" className="labels">
-              Role
+              <p style={{ color: "white" }}>Role </p>
             </label>
             <input
               type="text"
@@ -74,7 +73,7 @@ const Signup = () => {
           </div>
           <div className="boxThree">
             <label htmlFor="pass" className="labels">
-              Password
+              <p style={{ color: "white" }}>Password</p>
             </label>
             <input
               type="text"
@@ -96,9 +95,7 @@ const Signup = () => {
           </Link>
         </div>
       </main>
-      <footer>
-        <img src={require("../images/credit.png")} alt="" />
-      </footer>
+      <footer></footer>
     </div>
   );
 };

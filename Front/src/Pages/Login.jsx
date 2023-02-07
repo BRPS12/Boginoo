@@ -27,7 +27,7 @@ const Login = () => {
   return (
     <>
       <ToastContainer />
-      <div className="loginContainer">
+      <div className="loginContainer" style={{ backgroundColor: "black" }}>
         <header>
           <br />
           <span className="boginooHerhen">Хэрхэн ажилладаг вэ?</span>
@@ -38,7 +38,7 @@ const Login = () => {
             <p className="boginooP">Нэвтрэх</p>
             <div className="boxThree">
               <label htmlFor="email" className="labels">
-                Цахим хаяг
+                <p style={{ color: "white" }}>Цахим хаяг </p>
               </label>
               <input
                 type="text"
@@ -50,7 +50,7 @@ const Login = () => {
             </div>
             <div className="boxThree">
               <label htmlFor="pass" className="labels">
-                Нууц үг
+                <p style={{ color: "white" }}> Нууц үг</p>
               </label>
               <input
                 type="text"
@@ -79,9 +79,7 @@ const Login = () => {
             </Link>
           </div>
         </main>
-        <footer>
-          <img src={require("../images/credit.png")} alt="" />
-        </footer>
+        <footer></footer>
       </div>
     </>
   );

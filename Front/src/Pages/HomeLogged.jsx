@@ -21,7 +21,7 @@ const HomeLogged = () => {
   };
 
   const getHistory = async () => {
-    const res = await instance.get(`/links/?limit=3`);
+    const res = await instance.get(`/links/`);
     setHistory(
       res.data.data.map((el) => {
         setDel(el._id);
@@ -36,24 +36,87 @@ const HomeLogged = () => {
     //   })
     // );
   };
-  const Page = async () => {
-    const res = await instance.get(`/links/?limit=3&skip=3`);
-    setHistory(
-      res.data.data.map((el) => {
-        setDel(el._id);
-        return el.link;
-      })
-    );
-  };
-  const Page2 = async () => {
-    const res = await instance.get(`/links/?limit=3&skip=6`);
-    setHistory(
-      res.data.data.map((el) => {
-        setDel(el._id);
-        return el.link;
-      })
-    );
-  };
+  // const Page = async () => {
+  //   const res = await instance.get(`/links/?limit=3&skip=3`);
+  //   setHistory(
+  //     res.data.data.map((el) => {
+  //       setDel(el._id);
+  //       return el.link;
+  //     })
+  //   );
+  // };
+  // const Page2 = async () => {
+  //   const res = await instance.get(`/links/?limit=3&skip=6`);
+  //   setHistory(
+  //     res.data.data.map((el) => {
+  //       setDel(el._id);
+  //       return el.link;
+  //     })
+  //   );
+  // };
+  // const Page3 = async () => {
+  //   const res = await instance.get(`/links/?limit=3&skip=9`);
+  //   setHistory(
+  //     res.data.data.map((el) => {
+  //       setDel(el._id);
+  //       return el.link;
+  //     })
+  //   );
+  // };
+  // const Page4 = async () => {
+  //   const res = await instance.get(`/links/?limit=3&skip=12`);
+  //   setHistory(
+  //     res.data.data.map((el) => {
+  //       setDel(el._id);
+  //       return el.link;
+  //     })
+  //   );
+  // };
+  // const Page5 = async () => {
+  //   const res = await instance.get(`/links/?limit=3&skip=15`);
+  //   setHistory(
+  //     res.data.data.map((el) => {
+  //       setDel(el._id);
+  //       return el.link;
+  //     })
+  //   );
+  // };
+  // const Page6 = async () => {
+  //   const res = await instance.get(`/links/?limit=3&skip=18`);
+  //   setHistory(
+  //     res.data.data.map((el) => {
+  //       setDel(el._id);
+  //       return el.link;
+  //     })
+  //   );
+  // };
+  // const Page7 = async () => {
+  //   const res = await instance.get(`/links/?limit=3&skip=21`);
+  //   setHistory(
+  //     res.data.data.map((el) => {
+  //       setDel(el._id);
+  //       return el.link;
+  //     })
+  //   );
+  // };
+  // const Page8 = async () => {
+  //   const res = await instance.get(`/links/?limit=3&skip=24`);
+  //   setHistory(
+  //     res.data.data.map((el) => {
+  //       setDel(el._id);
+  //       return el.link;
+  //     })
+  //   );
+  // };
+  // const Page9 = async () => {
+  //   const res = await instance.get(`/links/?limit=3&skip=27`);
+  //   setHistory(
+  //     res.data.data.map((el) => {
+  //       setDel(el._id);
+  //       return el.link;
+  //     })
+  //   );
+  // };
   const deleteHistory = async () => {
     if (role === "admin") {
       await instance.delete(`/links/${del}`);
@@ -78,9 +141,9 @@ const HomeLogged = () => {
   useEffect(() => {
     getUser();
     getHistory();
-  }, []);
+  });
   return (
-    <div className="homeContainer">
+    <div className="homeContainer" style={{ backgroundColor: "black" }}>
       <ToastContainer />
       <header>
         <br />
@@ -123,10 +186,10 @@ const HomeLogged = () => {
           </button>
         </div>
         <div style={{ marginTop: 0 }}>
-          <p>Өгөгдсөн холбоос:</p>
+          <p style={{ color: "white" }}>Өгөгдсөн холбоос:</p>
 
-          <span>{link}</span>
-          <p>Богино холбоос:</p>
+          <span style={{ color: "blue" }}>{link}</span>
+          <p style={{ color: "white" }}>Богино холбоос:</p>
           <span style={{ color: "purple", fontSize: 20 }}>
             {"localhost:3000/" + data}
           </span>
@@ -147,10 +210,17 @@ const HomeLogged = () => {
         </div>
       </main>
       <footer>
-        <button onClick={getHistory}>1</button>
-        <button onClick={Page}>2</button>
+        {/* <button onClick={getHistory}>1</button> */}
+        {/* <button onClick={Page}>2</button>
         <button onClick={Page2}>3</button>
-        <img src={require("../images/credit.png")} alt="" />
+        <button onClick={Page3}>4</button>
+        <button onClick={Page4}>5</button>
+        <button onClick={Page5}>6</button>
+        <button onClick={Page6}>7</button>
+        <button onClick={Page7}>8</button>
+        <button onClick={Page8}>9</button>
+        <button onClick={Page9}>10</button> */}
+        {/* <img src={require("../images/credit.png")} alt="" /> */}
       </footer>
     </div>
   );

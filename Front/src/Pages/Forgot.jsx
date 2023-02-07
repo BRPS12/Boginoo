@@ -9,9 +9,11 @@ const Forgot = () => {
       </header>
       <main>
         <div className="loginBox">
-          <img src={require("../images/logo.png")} className="logo" />
+          <img src={require("../images/logo.png")} alt="" className="logo" />
           <p className="boginooP">Нууц үг сэргээх</p>
-          <span className="boginooSpan">Бид таны цахим хаяг руу нууц үг сэргээх хаяг явуулах болно.</span>
+          <span className="boginooSpan">
+            Бид таны цахим хаяг руу нууц үг сэргээх хаяг явуулах болно.
+          </span>
           <div className="boxThree">
             <label htmlFor="email" className="labels">
               Цахим хаяг

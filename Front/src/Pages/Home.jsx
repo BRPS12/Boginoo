@@ -18,7 +18,7 @@ const Home = () => {
     }
   };
   return (
-    <div className="homeContainer">
+    <div className="homeContainer" style={{ backgroundColor: "black" }}>
       <header>
         <ToastContainer />
         <br />
@@ -45,18 +45,16 @@ const Home = () => {
           </button>
         </div>
         <div>
-          <p>Өгөгдсөн холбоос:</p>
+          <p style={{ color: "white" }}>Өгөгдсөн холбоос:</p>
 
-          <span>{link}</span>
-          <p>Богино холбоос:</p>
+          <span style={{ color: "blue" }}>{link}</span>
+          <p style={{ color: "white" }}>Богино холбоос:</p>
           <span style={{ color: "purple", fontSize: 20 }}>
             localhost:3000/{data}
           </span>
         </div>
       </main>
-      <footer>
-        <img src={require("../images/credit.png")} alt="" />
-      </footer>
+      <footer></footer>
     </div>
   );
 };
