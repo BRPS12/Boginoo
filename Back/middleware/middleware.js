@@ -9,7 +9,6 @@ export const checkToken = (req, res, next) => {
       });
     } else {
       next();
-      console.log(result);
       return result;
     }
   });

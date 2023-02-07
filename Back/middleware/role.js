@@ -6,8 +6,6 @@ export const adminCheck = async (req, res, next) => {
     const { id } = req.params;
     const link = await Link.findById(id);
     const user = await User.findById(link.user_id);
-    console.log(id);
-    console.log(link.user_id);
     if (user.role === "admin") {
       return next();
     } else {
@@ -16,6 +14,7 @@ export const adminCheck = async (req, res, next) => {
   } catch (error) {
     res.status(401).send({
       success: false,
+      data: error.messsage,
     });
   }
 };
